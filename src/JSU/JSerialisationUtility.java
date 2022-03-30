@@ -31,14 +31,26 @@ public class JSerialisationUtility {
         }
     }
 
-    public static void SetString(String key, String value)
+    public static void SetString(String key, String valueToStore)
     {
-        
+        IntitialLoadCheck();
+
+        data.stringDict.put(key,valueToStore);
+        Serialisation.SaveFile(data, filePath, fileName);
     }
 
-    public static void GetString(String key, String defaultReturnValue)
+    public static String GetString(String key, String defaultReturnValue)
     {
+        IntitialLoadCheck();
 
+        if(data.stringDict.get(key) == null)
+        {
+            return defaultReturnValue;
+        }
+        else
+        {
+            return data.stringDict.get(key);
+        }
     }
 
     private static void IntitialLoadCheck()
