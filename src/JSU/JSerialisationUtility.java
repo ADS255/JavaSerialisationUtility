@@ -2,19 +2,19 @@ package JSU;
 
 public class JSerialisationUtility {
 
-    private static String fileName = "ProgramData";
-    private static String filePath = "c:\\";
+    private static String fileName = JSU_Settings.fileName;
+    private static String filePath = JSU_Settings.filePath;
 
     private static JSUData data;
 
-    private static boolean intitialLoad;
+    private static boolean intitialLoadComplete;
 
     public static void SetInt(String key, int valueToStore)
     {
-        if(intitialLoad == false)
+        if(intitialLoadComplete == false)
         {
             data = Serialisation.LoadFile(filePath, fileName);
-            intitialLoad= true;
+            intitialLoadComplete= true;
         }
 
         data.intDict.put(key, valueToStore);
@@ -23,8 +23,19 @@ public class JSerialisationUtility {
 
     public static int GetInt(String key, int defaultReturnValue)
     {
-
-        return 1;
+        if(intitialLoadComplete == false)
+        {
+            data = Serialisation.LoadFile(filePath, fileName);
+            intitialLoadComplete= true;
+        }
+        if(data.intDict.get(key) == null)
+        {
+            return defaultReturnValue;
+        }
+        else
+        {
+            return data.intDict.get(key);
+        }
     }
 
 }
