@@ -11,11 +11,7 @@ public class JSerialisationUtility {
 
     public static void SetInt(String key, int valueToStore)
     {
-        if(intitialLoadComplete == false)
-        {
-            data = Serialisation.LoadFile(filePath, fileName);
-            intitialLoadComplete= true;
-        }
+        IntitialLoadCheck();
 
         data.intDict.put(key, valueToStore);
         Serialisation.SaveFile(data, filePath, fileName);
@@ -23,11 +19,8 @@ public class JSerialisationUtility {
 
     public static int GetInt(String key, int defaultReturnValue)
     {
-        if(intitialLoadComplete == false)
-        {
-            data = Serialisation.LoadFile(filePath, fileName);
-            intitialLoadComplete= true;
-        }
+        IntitialLoadCheck();
+        
         if(data.intDict.get(key) == null)
         {
             return defaultReturnValue;
@@ -38,4 +31,12 @@ public class JSerialisationUtility {
         }
     }
 
+    private static void IntitialLoadCheck()
+    {
+        if(intitialLoadComplete == false)
+        {
+            data = Serialisation.LoadFile(filePath, fileName);
+            intitialLoadComplete= true;
+        }
+    }
 }
