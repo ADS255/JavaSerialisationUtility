@@ -20,7 +20,7 @@ public class JSerialisationUtility {
     public static int GetInt(String key, int defaultReturnValue)
     {
         IntitialLoadCheck();
-        
+
         if(data.intDict.get(key) == null)
         {
             return defaultReturnValue;
@@ -29,6 +29,16 @@ public class JSerialisationUtility {
         {
             return data.intDict.get(key);
         }
+    }
+
+    public static void SetString(String key, String value)
+    {
+        
+    }
+
+    public static void GetString(String key, String defaultReturnValue)
+    {
+
     }
 
     private static void IntitialLoadCheck()
