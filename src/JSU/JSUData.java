@@ -6,4 +6,5 @@ public class JSUData implements Serializable
 {
     public Hashtable <String, Integer> intDict = new Hashtable<>();
     public Hashtable <String, String> stringDict = new Hashtable<>();
+    public Hashtable <String, Integer> boolDict = new Hashtable<>();
 }
