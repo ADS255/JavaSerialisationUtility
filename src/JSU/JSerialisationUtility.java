@@ -53,7 +53,27 @@ public class JSerialisationUtility {
         }
     }
 
-    
+    public static void SetBoolean(String key, boolean valueToStore)
+    {
+        int i = BoolToInt(valueToStore);
+        data.boolDict.put(key,i);
+        Serialisation.SaveFile(data, filePath, fileName);
+    }
+
+    public static boolean GetBoolean(String key, Boolean defaultReturnValue)
+    {
+        IntitialLoadCheck();
+
+        if(data.boolDict.get(key) == null)
+        {
+            return defaultReturnValue;
+        }
+        else
+        {
+            int i = data.boolDict.get(key);
+            return IntToBool(i);
+        }
+    }
 
     private static void IntitialLoadCheck()
     {
@@ -61,6 +81,38 @@ public class JSerialisationUtility {
         {
             data = Serialisation.LoadFile(filePath, fileName);
             intitialLoadComplete= true;
+        }
+    }
+
+    private static int BoolToInt(boolean bool)
+    {
+        int i;
+
+        if(bool == true)
+        {
+            i=1;
+            return i;
+        }
+        else
+        {
+            i=0;
+            return i;
+        }
+    }
+
+    private static boolean IntToBool(int i)
+    {
+        boolean bool;
+
+        if(i==1)
+        {
+            bool=true;
+            return bool;
+        }
+        else
+        {
+            bool=false;
+            return bool;
         }
     }
 }
